@@ -18,6 +18,7 @@
   Note Taker writes and saves notes or tasks.
 
  ![NoteTakerHome](image.png)
+ ![Alt text](image-1.png)
 
   ## Installation
   
