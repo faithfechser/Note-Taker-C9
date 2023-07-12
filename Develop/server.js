@@ -15,6 +15,42 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
+// Routing
+// Homepage route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+  
+  // Notes page route
+  app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
+  });
+  
+  // API Route, get notes
+  app.get('/api/notes', (req, res) => {
+    const notes = getNotes();
+    res.json(notes);
+  });
+  
+  // API route, new notes
+  app.post('/api/notes', (req, res) => {
+    const { title, text } = req.body;
+    const newNote = { title, text, id: generateId() };
+    const notes = getNotes();
+    notes.push(newNote);
+    saveNotes(notes);
+    res.json(newNote);
+  });
+  
+  // API route, note deletion
+  app.delete('/api/notes/:id', (req, res) => {
+    const id = req.params.id;
+    const notes = getNotes();
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    saveNotes(updatedNotes);
+    res.sendStatus(200);
+  });
+
 // Server Start
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
