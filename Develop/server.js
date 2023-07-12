@@ -6,3 +6,10 @@ const fs = require('fs');
 const app = express();
 // PORT
 const PORT = process.env.PORT || 3000;
+// Parsing for:
+// Json data
+app.use(express.json());
+// urlended data
+app.use(express.urlencoded({ extended: true }));
+// Static files
+app.use(express.static('public'));
