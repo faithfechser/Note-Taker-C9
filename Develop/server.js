@@ -51,6 +51,22 @@ app.get('/', (req, res) => {
     res.sendStatus(200);
   });
 
+// Note reader function
+  function getNotes() {
+    const data = fs.readFileSync('db/db.json', 'utf8');
+    return JSON.parse(data);
+  }
+  
+  // Note Saving Function
+  function saveNotes(notes) {
+    fs.writeFileSync('db/db.json', JSON.stringify(notes));
+  }
+  
+  // ID Gen Function
+  function generateId() {
+    return Date.now().toString();
+  }
+
 // Server Start
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
