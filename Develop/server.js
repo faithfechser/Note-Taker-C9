@@ -13,3 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Static files
 app.use(express.static('public'));
+
+
+// Server Start
+app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
